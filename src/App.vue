@@ -14,14 +14,26 @@ import { store } from './store'
                 store,
             }
         },
+        methods:{
+            searchCharacter(){
+                axios.get(this.store.apiInfo.url,{
+                    params:{
+                        status:this.store.apiInfo.status,
+                        name:this.store.apiInfo.name
+                    }
+                })
+                .then((response) => this.store.results = response.data.results);
+            }
+        },
         created(){
-            axios.get(this.store.apiURL).then((response) => this.store.results = response.data.results);
-        }
+            this.searchCharacter();
+            
+        },
     };
 </script>
 
 <template>
-    <Header />
+    <Header @ricerca="searchCharacter" />
     <Main />
 </template>
 

@@ -1,6 +1,17 @@
 <script>
+import { store } from '../store';
     export default{
         name:'Header',
+        data(){
+            return{
+                store,
+            }
+        },
+        methods:{
+            searchStatus(){
+                console.log('aaaaaa')
+            }
+        }
     };
 </script>
 
@@ -11,9 +22,9 @@
                 <h1>Rick and Morty App</h1>
             </div>
             <div class="col">
-                <input type="text" placeholder="Search character">
-                <select name="status">
-                    <option value="" disabled selected>Select status</option>
+                <input type="text" placeholder="Search character" @input="$emit('ricerca')" v-model="store.apiInfo.name">
+                <select name="status" @change="$emit('ricerca')" v-model="store.apiInfo.status">
+                    <option value="" selected>Select status</option>
                     <option value="alive">Alive</option>
                     <option value="dead">Dead</option>
                     <option value="unknow">Unknow</option>
